@@ -1,0 +1,6 @@
+## Testing Requirements (pip install -r tests/requirements.txt)
+pytest==5.4.3
+pytest-cov==2.10.0
+pytest-flakes==4.0.0
+pytest-spec==2.0.0
+coverage==5.2.1
