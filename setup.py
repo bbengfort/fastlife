@@ -35,7 +35,7 @@ NAME         = "fastlife"
 DESCRIPTION  = "Benchmarks for implementations of Conway's Game of Life"
 AUTHOR       = "Benjamin Bengfort"
 EMAIL        = "benjamin@bengfort.com"
-LICENSE      = "BSD 3"
+LICENSE      = "BSD 3-Clause"
 REPOSITORY   = "https://github.com/bbengfort/fastlife"
 PACKAGE      = "fastlife"
 URL          = "https://fastlife.readthedocs.io/en/latest/"
@@ -158,7 +158,11 @@ config = {
     "packages": find_packages(where=PROJECT, exclude=EXCLUDES),
     "package_data": {},
     "zip_safe": False,
-    "entry_points": {"console_scripts": []},
+    "entry_points": {
+        "console_scripts": [
+            "fastlife = fastlife.__main__:main"
+        ],
+    },
     "install_requires": list(get_requires()),
     "python_requires": ">=3.4, <4",
     "setup_requires": ["pytest-runner"],

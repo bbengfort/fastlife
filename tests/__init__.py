@@ -24,8 +24,8 @@ EXPECTED_VERSION = "0.1"
 ## Initialization Tests
 ##########################################################################
 
-class TestInitialization(object):
 
+class TestInitialization(object):
     def test_sanity(self):
         """
         Test that tests work by confirming 7**3 = 343
@@ -51,4 +51,3 @@ class TestInitialization(object):
             assert fl.__version__ == EXPECTED_VERSION
         except ImportError:
             self.fail("Could not import the fastlife library!")
-
