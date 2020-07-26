@@ -38,6 +38,7 @@ EMAIL        = "benjamin@bengfort.com"
 LICENSE      = "BSD 3"
 REPOSITORY   = "https://github.com/bbengfort/fastlife"
 PACKAGE      = "fastlife"
+URL          = "https://fastlife.readthedocs.io/en/latest/"
 
 ## Define the keywords
 KEYWORDS = [
@@ -146,7 +147,9 @@ config = {
     "license": LICENSE,
     "author": AUTHOR,
     "author_email": EMAIL,
+    "url": URL,
     "project_urls": {
+        "Documentation": URL,
         "Download": "{}/tarball/v{}".format(REPOSITORY, get_version()),
         "Source": REPOSITORY,
         "Tracker": "{}/issues".format(REPOSITORY),
