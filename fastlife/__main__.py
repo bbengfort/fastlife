@@ -19,8 +19,10 @@ CLI program for running fastlife benchmarks and simulations.
 
 import argparse
 
+from .utils import sprofile
 from .version import get_version
 from .exceptions import ConsoleError
+from .sequential import SequentialLife
 
 
 ##########################################################################
@@ -41,7 +43,15 @@ def run(args):
     """
     Run a game of life simulation.
     """
-    raise ConsoleError("not implemented yet")
+    sim = SequentialLife(args.width, args.height)
+    if args.file:
+        sim.load(args.file)
+    else:
+        sim.randomize(args.seed)
+
+    runner = sim.animate if args.animate else sim.run
+    runner = sprofile(runner) if args.profile else runner
+    runner(steps=args.steps)
 
 
 def bench(args):
@@ -78,7 +88,36 @@ def main():
         "run": {
             "func": run,
             "description": "run a game of life simulation",
-            "args": {},
+            "args": {
+                ("-W", "--width"): {
+                    "type": int, "default": 75, "metavar": "W",
+                    "help": "the number of columns in the simulation",
+                },
+                ("-H", "--height"): {
+                    "type": int, "default": 75, "metavar": "H",
+                    "help": "the number of rows in the simulation",
+                },
+                ("-f", "--file"): {
+                    "type": str, "default": None, "metavar": "PATH",
+                    "help": "initialize the simulation from a data file",
+                },
+                ("-S", "--seed"): {
+                    "type": int, "default": None, "metavar": "N",
+                    "help": "random seed to load a randomized world with",
+                },
+                ("-a", "--animate"): {
+                    "action": "store_true",
+                    "help": "animate the progress of the simulation",
+                },
+                ("-P", "--profile"): {
+                    "action": "store_true",
+                    "help": "profile stack calls for the simulation",
+                },
+                ("-s", "--steps"): {
+                    "type": int, "default": 150, "metavar": "T",
+                    "help": "maximum number of steps to simulate",
+                },
+            },
         },
         "bench": {
             "func": bench,
